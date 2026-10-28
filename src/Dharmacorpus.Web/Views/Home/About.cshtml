@@ -1,0 +1,61 @@
+@model ContentService
+@{ var site = Model.Site; }
+
+<partial name="_PageHero" model='new PageHeroModel("About Dharmacorpus", "A legal practice founded to provide rigorous, accessible and practical legal assistance to individuals, businesses and institutions.", "Our practice")' />
+
+<section class="py-20 sm:py-24">
+    <div class="container-site grid items-start gap-14 lg:grid-cols-[1.4fr_1fr]">
+        <div class="space-y-6 text-lg leading-relaxed">
+            <p>Dharmacorpus is a legal practice founded with the aim of providing rigorous, accessible and practical legal assistance to individuals, businesses and institutions. Rooted in Dharmapuri and extending across Tamil Nadu and other jurisdictions, our practice spans litigation, dispute resolution, corporate and commercial matters, property, criminal law and emerging areas of legal practice.</p>
+            <p>Our work is grounded in a simple discipline: understand the law, assess the risks, and choose the right course of action. That approach informs both our legal practice and our commitment to clear legal knowledge.</p>
+            <div class="flex flex-wrap gap-4 pt-2">
+                <a href="/practice-areas" class="btn-primary">Explore our practice @Html.Icon("arrow-right", "size-[18px]", 2)</a>
+                <a href="/team" class="btn-outline">Meet the team</a>
+            </div>
+        </div>
+        <aside class="flex flex-col gap-6 rounded-xl bg-ink p-8 text-line sm:p-10" aria-label="At a glance">
+            <div class="leaf-rule" aria-hidden="true"><span></span></div>
+            <p class="eyebrow-dark">At a glance</p>
+            <p><span class="block font-serif text-5xl font-semibold text-ivory">@site.YearsCombined</span><span class="text-sm">Years of combined legal practice, based on the professional experience of the firm's advocates since enrolment.</span></p>
+            <blockquote class="border-l-2 border-gold pl-4 font-serif text-xl italic leading-snug text-ivory">“@site.Tagline”</blockquote>
+            <ul class="space-y-2 text-[15px]">
+                <li class="flex gap-3"><span class="text-gold">@Html.Icon("check", "size-5", 2)</span>District Courts &amp; High Courts</li>
+                <li class="flex gap-3"><span class="text-gold">@Html.Icon("check", "size-5", 2)</span>Multi-disciplinary practice</li>
+                <li class="flex gap-3"><span class="text-gold">@Html.Icon("check", "size-5", 2)</span>Tamil Nadu &amp; beyond</li>
+            </ul>
+            <div class="leaf-rule" aria-hidden="true"><span></span></div>
+        </aside>
+    </div>
+</section>
+
+<section class="border-y border-line bg-mist py-20 sm:py-24" aria-labelledby="whyTitle">
+    <div class="container-site flex flex-col gap-10">
+        <div class="max-w-2xl space-y-3">
+            <p class="eyebrow">§ 01 · Our approach</p>
+            <h2 id="whyTitle" class="h2">Why Dharmacorpus?</h2>
+            <p class="lead">A dispute-focused practice grounded in careful analysis and a clear course of action.</p>
+        </div>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="card reveal space-y-3 p-7"><span class="font-serif text-3xl font-semibold text-gold-dark">01</span><h3 class="text-xl font-semibold">Rigorous analysis</h3><p class="text-[15px] leading-relaxed">We examine the facts, documents and applicable law before advising on strategy.</p></div>
+            <div class="card reveal space-y-3 p-7"><span class="font-serif text-3xl font-semibold text-gold-dark">02</span><h3 class="text-xl font-semibold">Practical strategy</h3><p class="text-[15px] leading-relaxed">Legal advice should lead to a clear course of action.</p></div>
+            <div class="card reveal space-y-3 p-7"><span class="font-serif text-3xl font-semibold text-gold-dark">03</span><h3 class="text-xl font-semibold">Dispute-focused practice</h3><p class="text-[15px] leading-relaxed">We handle litigation, arbitration and other forms of dispute resolution.</p></div>
+            <div class="card reveal space-y-3 p-7"><span class="font-serif text-3xl font-semibold text-gold-dark">04</span><h3 class="text-xl font-semibold">Multidisciplinary approach</h3><p class="text-[15px] leading-relaxed">Our practice extends across litigation, property, commercial, regulatory and emerging areas of law.</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 sm:py-24" aria-labelledby="processTitle">
+    <div class="container-site flex flex-col gap-10">
+        <div class="max-w-2xl space-y-3">
+            <p class="eyebrow">§ 02 · Our process</p>
+            <h2 id="processTitle" class="h2">How we work</h2>
+            <p class="lead">A structured process from the first conversation through to representation and follow-up.</p>
+        </div>
+        <partial name="_ProcessSteps" />
+    </div>
+</section>
+
+<partial name="_Courts" model='"§ 03 · Jurisdictions"' />
+
+<div class="pt-16 sm:pt-20"></div>
+<partial name="_ContactBand" />

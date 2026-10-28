@@ -1,0 +1,13 @@
+@model PracticeArea
+<a href="/practice-areas/@Model.Slug" data-group="@ContentService.GroupId(Model.Group)"
+   class="card reveal group flex flex-col gap-3 p-7 no-underline transition hover:-translate-y-0.5 hover:border-navy hover:shadow-lg">
+    <div class="flex items-center justify-between gap-3">
+        <span class="font-serif text-[15px] font-semibold text-gold-dark">§ @Model.NumberLabel</span>
+        <span class="text-right text-[11px] font-bold uppercase tracking-[0.08em] text-slate">@Model.Group</span>
+    </div>
+    <h3 class="text-[22px] font-semibold leading-snug">@Model.Title</h3>
+    <p class="text-[15px] leading-relaxed text-slate">@Model.Summary</p>
+    <span class="mt-auto inline-flex items-center gap-2 pt-2 text-[15px] font-bold text-navy">
+        Read more <span class="transition group-hover:translate-x-1">@Html.Icon("arrow-right", "size-4", 2)</span>
+    </span>
+</a>

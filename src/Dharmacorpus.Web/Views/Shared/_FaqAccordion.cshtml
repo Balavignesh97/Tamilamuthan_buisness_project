@@ -1,0 +1,18 @@
+@model IReadOnlyList<Faq>
+@* Flowbite accordion: answers stay in the HTML (good for SEO); JS only toggles visibility. *@
+<div id="faqAccordion" data-accordion="collapse" data-active-classes="text-ink" data-inactive-classes="text-ink" class="border-t border-line">
+    @for (var i = 0; i < Model.Count; i++)
+    {
+        var id = $"faq-{i}";
+        <h3 id="@id-heading" class="font-sans">
+            <button type="button" class="flex min-h-14 w-full items-center justify-between gap-4 border-b border-line py-5 text-left text-lg font-bold text-ink"
+                    data-accordion-target="#@id-body" aria-expanded="@(i == 0 ? "true" : "false")" aria-controls="@id-body">
+                <span>@Model[i].Question</span>
+                <span data-accordion-icon class="shrink-0 text-navy transition-transform">@Html.Icon("chevron-down", "size-5", 2)</span>
+            </button>
+        </h3>
+        <div id="@id-body" class="@(i == 0 ? "" : "hidden")" aria-labelledby="@id-heading">
+            <p class="max-w-2xl border-b border-line pb-5 pt-1 text-base leading-relaxed">@Model[i].Answer</p>
+        </div>
+    }
+</div>

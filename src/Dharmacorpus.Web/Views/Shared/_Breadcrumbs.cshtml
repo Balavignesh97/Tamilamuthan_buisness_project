@@ -1,0 +1,18 @@
+@model IReadOnlyList<(string Name, string Path)>
+<nav aria-label="Breadcrumb" class="text-sm">
+    <ol class="flex flex-wrap items-center gap-2">
+        <li><a href="/" class="no-underline hover:underline">Home</a></li>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            <li aria-hidden="true" class="text-line-strong">/</li>
+            if (i == Model.Count - 1)
+            {
+                <li><span class="text-ink" aria-current="page">@Model[i].Name</span></li>
+            }
+            else
+            {
+                <li><a href="@Model[i].Path" class="no-underline hover:underline">@Model[i].Name</a></li>
+            }
+        }
+    </ol>
+</nav>

@@ -1,0 +1,92 @@
+@model string?
+@inject ContentService Content
+@{
+    var site = Content.Site;
+    string Nav(string key) => Model == key
+        ? "text-navy border-b-2 border-navy"
+        : "text-ink border-b-2 border-transparent hover:border-line-strong";
+}
+<div class="bg-ink text-[13px] text-line">
+    <div class="container-site flex h-10 items-center justify-between gap-4">
+        <span class="truncate">@site.Locality, @site.Region · Advocates &amp; Legal Consultants</span>
+        <div class="hidden items-center gap-5 sm:flex">
+            <a href="tel:@site.Phone" class="text-line no-underline hover:text-white">@site.PhoneDisplay</a>
+            <a href="mailto:@site.Email" class="text-line no-underline hover:text-white">@site.Email</a>
+        </div>
+    </div>
+</div>
+
+<header class="sticky top-0 z-30 border-b border-line bg-ivory/95 backdrop-blur" data-site-header>
+    <div class="container-site flex h-20 items-center justify-between gap-6">
+        <a href="/" class="flex items-center gap-3 no-underline" aria-label="@site.Name home">
+            <span class="flex size-11 items-center justify-center rounded-lg bg-navy font-serif text-[26px] font-semibold text-ivory">§</span>
+            <span class="flex flex-col leading-tight">
+                <span class="font-serif text-[21px] font-bold tracking-[0.06em] text-ink">DHARMACORPUS</span>
+                <span class="text-[11px] uppercase tracking-[0.18em] text-gold-dark">Legal Practice</span>
+            </span>
+        </a>
+
+        <nav aria-label="Main" class="hidden items-center gap-7 text-[15px] font-bold lg:flex">
+            <a href="/about" class="@Nav("about") py-1 no-underline">About</a>
+            <button type="button" id="practiceMenuButton" data-dropdown-toggle="practiceMenu" data-dropdown-offset-distance="18"
+                    class="@Nav("practice") flex items-center gap-1 py-1 font-bold" aria-haspopup="true">
+                Practice Areas @Html.Icon("chevron-down", "size-4")
+            </button>
+            <a href="/team" class="@Nav("team") py-1 no-underline">Team</a>
+            <a href="/contact" class="@Nav("contact") py-1 no-underline">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+            <a href="/contact" class="btn-primary hidden !py-2.5 sm:inline-flex">Arrange a consultation</a>
+            <button type="button" class="flex size-11 items-center justify-center rounded-lg text-ink lg:hidden"
+                    data-drawer-target="mobileMenu" data-drawer-show="mobileMenu" data-drawer-placement="right"
+                    aria-controls="mobileMenu" aria-label="Open menu">
+                @Html.Icon("menu", "size-6", 2)
+            </button>
+        </div>
+    </div>
+
+    <!-- Practice areas mega menu (desktop) -->
+    <div id="practiceMenu" class="z-40 hidden w-[min(92vw,760px)] rounded-xl border border-line bg-white p-6 shadow-xl" aria-labelledby="practiceMenuButton">
+        <div class="grid grid-cols-2 gap-x-8 gap-y-6">
+            @foreach (var group in Content.Groups)
+            {
+                <div>
+                    <p class="mb-2 text-xs font-bold uppercase tracking-[0.12em] text-gold-dark">@group</p>
+                    <ul class="space-y-1">
+                        @foreach (var p in Content.PracticeAreas.Where(p => p.Group == group))
+                        {
+                            <li><a href="/practice-areas/@p.Slug" class="block rounded-md px-2 py-1.5 text-[15px] text-ink no-underline hover:bg-mist">@p.Title</a></li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+        <div class="mt-5 border-t border-line pt-4">
+            <a href="/practice-areas" class="link-arrow text-[15px]">All practice areas @Html.Icon("arrow-right", "size-4", 2)</a>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile menu drawer -->
+<div id="mobileMenu" class="fixed right-0 top-0 z-50 h-screen w-80 max-w-[85vw] translate-x-full overflow-y-auto bg-white p-5 transition-transform"
+     tabindex="-1" aria-label="Menu" role="dialog" aria-modal="true">
+    <div class="mb-6 flex items-center justify-between">
+        <span class="font-serif text-lg font-bold tracking-[0.06em] text-ink">DHARMACORPUS</span>
+        <button type="button" data-drawer-hide="mobileMenu" aria-controls="mobileMenu"
+                class="flex size-11 items-center justify-center rounded-lg text-ink" aria-label="Close menu">
+            @Html.Icon("x", "size-6", 2)
+        </button>
+    </div>
+    <nav aria-label="Mobile" class="flex flex-col text-lg font-bold">
+        <a href="/" class="border-b border-line py-3.5 text-ink no-underline">Home</a>
+        <a href="/about" class="border-b border-line py-3.5 text-ink no-underline">About</a>
+        <a href="/practice-areas" class="border-b border-line py-3.5 text-ink no-underline">Practice Areas</a>
+        <a href="/team" class="border-b border-line py-3.5 text-ink no-underline">Team</a>
+        <a href="/contact" class="border-b border-line py-3.5 text-ink no-underline">Contact</a>
+    </nav>
+    <div class="mt-8 space-y-3">
+        <a href="tel:@site.Phone" class="btn-primary w-full">@Html.Icon("phone") Call the office</a>
+        <a href="mailto:@site.Email" class="btn-outline w-full">@Html.Icon("mail") Email the office</a>
+    </div>
+</div>

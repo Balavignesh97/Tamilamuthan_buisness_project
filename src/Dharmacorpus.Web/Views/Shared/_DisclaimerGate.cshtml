@@ -1,0 +1,26 @@
+@* Bar Council of India Rule 36: visitors confirm they are seeking information on their own initiative.
+   Hidden until site.js shows it; the choice is remembered for 30 days on the device. *@
+<div id="disclaimerGate" class="fixed inset-0 z-[60] hidden items-end justify-center bg-ink/60 sm:items-center sm:p-6"
+     role="dialog" aria-modal="true" aria-labelledby="gateTitle" aria-describedby="gateText">
+    <div class="w-full max-w-lg rounded-t-2xl bg-white px-5 pb-7 pt-6 shadow-2xl sm:rounded-2xl sm:p-8">
+        <div class="mb-4 flex items-center gap-3">
+            <span class="flex size-9 items-center justify-center rounded-lg bg-navy font-serif text-xl font-semibold text-ivory">§</span>
+            <span class="font-serif text-lg font-bold tracking-[0.06em] text-ink">DHARMACORPUS</span>
+        </div>
+        <h2 id="gateTitle" class="mb-3 text-[26px] font-semibold leading-tight">Before you continue</h2>
+        <div id="gateText" class="space-y-3 text-[15px] leading-relaxed">
+            <p>The Bar Council of India does not permit advocates to solicit work or advertise. By choosing “I agree”, you confirm that:</p>
+            <ul class="list-disc space-y-1.5 pl-5 text-ink">
+                <li>you are seeking information about Dharmacorpus on your own initiative;</li>
+                <li>there has been no advertisement, solicitation or inducement by the firm or its members;</li>
+                <li>the content of this website is general information and is not legal advice.</li>
+            </ul>
+            <p><a href="/disclaimer" class="font-bold">Read the full disclaimer</a></p>
+        </div>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row-reverse">
+            <button type="button" class="btn-primary w-full sm:w-auto" data-gate-accept>I agree, continue</button>
+            <a href="https://www.google.com/" class="btn-outline w-full sm:w-auto" rel="noopener">Leave this site</a>
+        </div>
+        <p class="mt-4 text-center text-xs sm:text-left">Your choice is remembered on this device for 30 days.</p>
+    </div>
+</div>

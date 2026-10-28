@@ -1,0 +1,22 @@
+@* The practice's own six-step process, as published on the current site. *@
+@{
+    var steps = new (string Title, string Text)[]
+    {
+        ("Initial consultation", "Understand the matter and identify the immediate legal concerns."),
+        ("Document review", "Examine relevant documents, notices, orders and records."),
+        ("Legal assessment", "Identify applicable law, issues, risks and available remedies."),
+        ("Strategy and drafting", "Develop the appropriate legal strategy and prepare necessary documents."),
+        ("Representation", "Appear and represent the client before the appropriate forum."),
+        ("Follow-up and execution", "Monitor proceedings and advise on subsequent steps and implementation.")
+    };
+}
+<ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-6">
+    @for (var i = 0; i < steps.Length; i++)
+    {
+        <li class="reveal flex flex-col gap-2 border-t-2 border-navy pt-5">
+            <span class="font-serif text-[32px] font-semibold leading-none text-gold">@((i + 1).ToString("00"))</span>
+            <h3 class="font-sans text-[17px] font-bold text-ink">@steps[i].Title</h3>
+            <p class="text-sm leading-relaxed">@steps[i].Text</p>
+        </li>
+    }
+</ol>

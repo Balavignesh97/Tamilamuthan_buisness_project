@@ -1,0 +1,16 @@
+@model Advocate
+<a href="/team/@Model.Slug" class="reveal group flex flex-col gap-3 no-underline">
+    <div class="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-xl border border-line bg-navy-tint">
+        @if (!string.IsNullOrWhiteSpace(Model.Photo))
+        {
+            <img src="@Model.Photo" alt="Portrait of @Model.Name" class="size-full object-cover" loading="lazy" width="480" height="600" />
+        }
+        else
+        {
+            <span class="font-serif text-5xl font-semibold text-navy" aria-hidden="true">@Model.Initials</span>
+        }
+    </div>
+    <h3 class="text-[21px] font-semibold group-hover:underline">@Model.Name</h3>
+    <p class="-mt-2 text-sm leading-snug text-slate">@Model.Titles</p>
+    <span class="text-[13px] font-bold text-gold-dark">View profile →</span>
+</a>

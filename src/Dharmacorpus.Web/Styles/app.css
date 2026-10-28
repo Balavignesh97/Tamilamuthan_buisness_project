@@ -1,0 +1,115 @@
+@import "tailwindcss";
+@plugin "flowbite/plugin";
+@source "../Views";
+@source "../wwwroot/js";
+@source "../node_modules/flowbite/dist/flowbite.min.js";
+
+/* Self-hosted fonts (copied to wwwroot/fonts by build/copy-vendor.mjs) */
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/playfair-display-latin-600-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/playfair-display-latin-700-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/lato-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/lato-latin-700-normal.woff2") format("woff2");
+}
+
+/* "Navy & Ivory" design tokens */
+@theme {
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-navy: #1B2A41;
+  --color-ink: #16202E;
+  --color-navy-tint: #E8ECF2;
+  --color-gold: #B08A3E;
+  --color-gold-dark: #7E6126;
+  --color-ivory: #FAF8F4;
+  --color-mist: #F3F4F6;
+  --color-line: #E5E7EB;
+  --color-line-strong: #CBD0D8;
+  --color-slate: #4A5363;
+  --color-clay: #9A3B2E;
+  --color-panel-line: #3A4658;
+  --color-panel-muted: #B4BAC4;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-ivory font-sans text-slate antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  h1, h2, h3 { @apply font-serif text-ink; }
+  a { @apply text-navy; }
+  :focus-visible {
+    outline: 3px solid var(--color-gold-dark);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+}
+
+/* Reusable building blocks. Declared with @utility so they can be combined and @apply-ed. */
+@utility container-site { @apply mx-auto w-full max-w-[1200px] px-4 sm:px-8; }
+@utility eyebrow { @apply text-[13px] font-bold uppercase tracking-[0.14em] text-gold-dark; }
+@utility eyebrow-dark { @apply text-[13px] font-bold uppercase tracking-[0.14em] text-gold; }
+@utility h2 { @apply font-serif text-[28px] font-semibold leading-tight text-ink sm:text-[40px]; }
+@utility lead { @apply text-lg leading-relaxed; }
+
+@utility btn { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-bold no-underline transition-colors; }
+@utility btn-primary { @apply btn bg-navy text-white hover:bg-ink; }
+@utility btn-outline { @apply btn border-[1.5px] border-navy text-navy hover:bg-navy-tint; }
+@utility btn-light { @apply btn bg-white text-ink hover:bg-navy-tint; }
+@utility btn-ghost-light { @apply btn border-[1.5px] border-white text-white hover:bg-white/10; }
+
+@utility card { @apply rounded-xl border border-line bg-white; }
+@utility link-arrow { @apply inline-flex items-center gap-2 font-bold no-underline hover:underline; }
+
+@utility chip {
+  @apply inline-flex min-h-11 cursor-pointer items-center rounded-full border border-line-strong px-4 py-2 text-[15px] text-ink transition-colors hover:border-navy;
+  &[aria-selected="true"] { @apply border-ink bg-ink font-bold text-ivory; }
+}
+
+@utility field { @apply block min-h-12 w-full rounded-lg border border-line-strong bg-white px-3.5 py-3 text-base text-ink placeholder:text-slate/70 focus:border-navy focus:ring-0; }
+
+@layer components {
+  .field-error { @apply mt-1 block text-sm text-clay; }
+  .field.input-validation-error { @apply border-clay; }
+
+  /* Palm-leaf (olai chuvadi) divider */
+  .leaf-rule { @apply flex items-center gap-3; }
+  .leaf-rule::before, .leaf-rule::after { content: ""; @apply h-px flex-1 bg-gold; }
+  .leaf-rule > span { @apply block size-2.5 rounded-full border-[1.5px] border-gold; }
+
+  .prose-legal h2 { @apply mt-10 mb-3 font-serif text-2xl font-semibold text-ink; }
+  .prose-legal p { @apply mb-4 leading-relaxed; }
+  .prose-legal ul { @apply mb-4 list-disc pl-6; }
+
+  /* Only hidden when JS is running (site.js adds .js), so content is never lost without JS. */
+  .js .reveal { @apply translate-y-3 opacity-0 transition duration-300 ease-out; }
+  .js .reveal.is-visible { @apply translate-y-0 opacity-100; }
+}

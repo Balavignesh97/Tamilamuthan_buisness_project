@@ -1,0 +1,18 @@
+@model ContentService
+
+<partial name="_PageHero" model='new PageHeroModel("Legal practice across eleven areas", $"Dharmacorpus advises and represents clients across {Model.Site.PracticeAreaCount} areas of legal practice, before courts, tribunals and statutory forums.", "Our expertise")' />
+
+<section class="bg-mist py-14 sm:py-20">
+    <div class="container-site flex flex-col gap-8">
+        <partial name="_PracticeFilter" model="Model.Groups" />
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-practice-grid>
+            @foreach (var p in Model.PracticeAreas)
+            {
+                <partial name="_PracticeCard" model="p" />
+            }
+        </div>
+    </div>
+</section>
+
+<div class="pt-16 sm:pt-20"></div>
+<partial name="_ContactBand" />

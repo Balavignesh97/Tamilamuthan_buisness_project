@@ -1,0 +1,9 @@
+@model IReadOnlyList<string>
+@* Filter chips for practice cards; site.js shows/hides cards by data-group. *@
+<div role="tablist" aria-label="Filter practice areas" class="flex flex-wrap gap-2" data-practice-filter>
+    <button type="button" role="tab" class="chip" aria-selected="true" data-filter="all">All</button>
+    @foreach (var g in Model)
+    {
+        <button type="button" role="tab" class="chip" aria-selected="false" data-filter="@ContentService.GroupId(g)">@g</button>
+    }
+</div>

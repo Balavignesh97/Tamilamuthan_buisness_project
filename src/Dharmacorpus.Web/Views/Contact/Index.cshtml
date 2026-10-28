@@ -1,0 +1,121 @@
+@model ContactViewModel
+@inject ContentService Content
+@{ var site = Content.Site; }
+
+<partial name="_PageHero" model='new PageHeroModel("Contact Dharmacorpus", "Tell us briefly about your matter. We will understand the immediate legal concern and confirm whether we can assist and the appropriate next step.", "Get in touch")' />
+
+<section class="py-14 sm:py-16">
+    <div class="container-site flex flex-wrap items-start gap-12">
+
+        <div class="min-w-0 flex-[999_1_560px]">
+            <div id="enquirySuccess" class="@(Model.Sent ? "" : "hidden") card space-y-3 p-8 sm:p-10" role="status" tabindex="-1">
+                <span class="flex size-12 items-center justify-center rounded-full bg-navy-tint text-navy">@Html.Icon("check", "size-6", 2)</span>
+                <h2 class="text-[28px] font-semibold">Thank you, your enquiry has been sent</h2>
+                <p class="text-base leading-relaxed">The office will review it and call or write back to confirm whether we can assist and the appropriate next step. For anything urgent, please call <a href="tel:@site.Phone" class="font-bold">@site.PhoneDisplay</a>.</p>
+            </div>
+
+            <form id="enquiryForm" method="post" asp-controller="Contact" asp-action="Index" novalidate
+                  class="@(Model.Sent ? "hidden" : "") card flex flex-col gap-6 p-6 sm:p-10" aria-labelledby="formTitle">
+                <div class="space-y-1.5">
+                    <h2 id="formTitle" class="text-[28px] font-semibold">Send an enquiry</h2>
+                    <p class="text-[15px]">Fields marked * are required.</p>
+                </div>
+
+                <div id="enquiryError" class="@(Model.Error is null ? "hidden" : "") rounded-lg border border-clay/40 bg-clay/5 p-4 text-[15px] text-clay" role="alert">@Model.Error</div>
+
+                <div class="grid gap-5 sm:grid-cols-2">
+                    <div class="space-y-2">
+                        <label asp-for="Form.Name" class="block text-[15px] font-bold text-ink">Full name *</label>
+                        <input asp-for="Form.Name" class="field" autocomplete="name" maxlength="100" />
+                        <span asp-validation-for="Form.Name" class="field-error"></span>
+                    </div>
+                    <div class="space-y-2">
+                        <label asp-for="Form.Phone" class="block text-[15px] font-bold text-ink">Phone *</label>
+                        <input asp-for="Form.Phone" type="tel" class="field" autocomplete="tel" inputmode="tel" placeholder="+91" maxlength="16" />
+                        <span asp-validation-for="Form.Phone" class="field-error"></span>
+                    </div>
+                    <div class="space-y-2">
+                        <label asp-for="Form.Email" class="block text-[15px] font-bold text-ink">Email</label>
+                        <input asp-for="Form.Email" type="email" class="field" autocomplete="email" maxlength="254" />
+                        <span asp-validation-for="Form.Email" class="field-error"></span>
+                    </div>
+                    <div class="space-y-2">
+                        <label asp-for="Form.Area" class="block text-[15px] font-bold text-ink">Area of your matter *</label>
+                        <select asp-for="Form.Area" class="field">
+                            <option value="">Choose an area</option>
+                            @foreach (var area in Model.Areas)
+                            {
+                                <option value="@area" selected="@(Model.Form.Area == area)">@area</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Form.Area" class="field-error"></span>
+                    </div>
+                </div>
+
+                <fieldset class="space-y-2.5">
+                    <legend class="mb-2.5 text-[15px] font-bold text-ink">Preferred language</legend>
+                    <div class="flex flex-wrap gap-3">
+                        @foreach (var lang in EnquiryForm.Languages)
+                        {
+                            var label = lang == "Tamil" ? "தமிழ் (Tamil)" : "English";
+                            <label class="flex min-h-11 cursor-pointer items-center gap-2.5 rounded-lg border border-line-strong px-4 py-2.5 has-checked:border-navy has-checked:bg-navy-tint">
+                                <input type="radio" name="Form.Language" value="@lang" checked="@(Model.Form.Language == lang)" class="size-[18px] accent-navy" />
+                                <span lang="@(lang == "Tamil" ? "ta" : "en")">@label</span>
+                            </label>
+                        }
+                    </div>
+                </fieldset>
+
+                <div class="space-y-2">
+                    <label asp-for="Form.Message" class="block text-[15px] font-bold text-ink">Briefly describe your matter *</label>
+                    <textarea asp-for="Form.Message" rows="5" maxlength="600" class="field min-h-36 resize-y" data-counter="#messageCount"
+                              placeholder="What happened, and what help you are looking for"></textarea>
+                    <div class="flex justify-between gap-4 text-[13px]">
+                        <span>Please do not include confidential details or attach documents yet.</span>
+                        <span id="messageCount" aria-live="polite">0 / 600</span>
+                    </div>
+                    <span asp-validation-for="Form.Message" class="field-error"></span>
+                </div>
+
+                @* Honeypot: hidden from people and screen readers; bots tend to fill it. *@
+                <div class="absolute -left-[9999px] size-px overflow-hidden" aria-hidden="true">
+                    <label for="Form_Website">Website</label>
+                    <input id="Form_Website" name="Form.Website" type="text" tabindex="-1" autocomplete="off" />
+                </div>
+
+                <div class="space-y-1">
+                    <label class="flex cursor-pointer items-start gap-3 text-sm leading-relaxed">
+                        <input type="checkbox" name="Form.Consent" value="true" checked="@Model.Form.Consent" class="mt-0.5 size-5 shrink-0 accent-navy" />
+                        <span>I understand that sending this enquiry does not create an advocate–client relationship, and I agree to the <a href="/privacy-policy">Privacy Policy</a>.</span>
+                    </label>
+                    <span asp-validation-for="Form.Consent" class="field-error"></span>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-4">
+                    <button type="submit" class="btn-primary min-h-[52px] px-8" data-submit-label="Send enquiry">Send enquiry</button>
+                    <span class="text-sm">or call <a href="tel:@site.Phone" class="font-bold">@site.PhoneDisplay</a></span>
+                </div>
+            </form>
+        </div>
+
+        <aside class="flex flex-[1_1_340px] flex-col gap-5" aria-label="Office details">
+            <div class="flex flex-col gap-5 rounded-2xl bg-ink p-8 text-line">
+                <h2 class="text-2xl font-semibold text-ivory">Office</h2>
+                <p class="flex gap-3.5"><span class="shrink-0 text-gold">@Html.Icon("map-pin", "size-[22px]")</span><span class="leading-relaxed">@site.Locality, @site.Region, @site.CountryName<br />For directions to the office, please call ahead.</span></p>
+                <p class="flex items-center gap-3.5"><span class="shrink-0 text-gold">@Html.Icon("phone", "size-[22px]")</span><a href="tel:@site.Phone" class="font-bold text-ivory no-underline">@site.PhoneDisplay</a></p>
+                <p class="flex items-center gap-3.5"><span class="shrink-0 text-gold">@Html.Icon("mail", "size-[22px]")</span><a href="mailto:@site.Email" class="font-bold text-ivory no-underline">@site.Email</a></p>
+            </div>
+            <div class="space-y-3 rounded-2xl border border-line bg-white p-7">
+                <h2 class="text-xl font-semibold">What happens next</h2>
+                <ol class="space-y-3 text-[15px] leading-relaxed">
+                    <li class="flex gap-3"><span class="font-serif font-semibold text-gold-dark">01</span>An advocate reads your short description.</li>
+                    <li class="flex gap-3"><span class="font-serif font-semibold text-gold-dark">02</span>We call or write back to confirm whether we can assist.</li>
+                    <li class="flex gap-3"><span class="font-serif font-semibold text-gold-dark">03</span>If we take up the matter, we arrange a consultation and tell you what to bring.</li>
+                </ol>
+            </div>
+        </aside>
+    </div>
+    <div class="container-site mt-10">
+        <p class="text-[13px]">Information on this website is provided for general awareness and does not constitute legal advice. Contacting Dharmacorpus does not by itself create an advocate–client relationship.</p>
+    </div>
+</section>

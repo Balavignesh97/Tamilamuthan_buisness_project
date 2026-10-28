@@ -1,0 +1,57 @@
+﻿@inject SeoService Seo
+@inject ContentService Content
+@{
+    var seo = ViewData.GetSeo() ?? new SeoMeta { Title = Content.Site.Name, Description = Content.Site.Description, Path = "/" };
+    var canonical = Seo.Absolute(seo.Path);
+}
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@seo.Title</title>
+    <meta name="description" content="@seo.Description" />
+    <link rel="canonical" href="@canonical" />
+    @if (seo.NoIndex)
+    {
+        <meta name="robots" content="noindex, follow" />
+    }
+    <meta name="theme-color" content="#1B2A41" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <meta property="og:type" content="@seo.OgType" />
+    <meta property="og:site_name" content="@Content.Site.Name" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:title" content="@seo.Title" />
+    <meta property="og:description" content="@seo.Description" />
+    <meta property="og:url" content="@canonical" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="@seo.Title" />
+    <meta name="twitter:description" content="@seo.Description" />
+
+    <link rel="icon" href="~/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="~/fonts/playfair-display-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="~/fonts/lato-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    @* "!" opts this element out of tag helpers so the type attribute is written verbatim. *@
+    <!script type="application/ld+json">@Html.Raw(Seo.BuildJsonLd(seo))</!script>
+</head>
+<body class="pb-[72px] md:pb-0">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2">Skip to main content</a>
+
+    <partial name="_Header" model="seo.NavKey" />
+
+    <main id="main" tabindex="-1">
+        @RenderBody()
+    </main>
+
+    <partial name="_Footer" />
+    <partial name="_MobileBar" />
+    <partial name="_DisclaimerGate" />
+
+    <script src="~/lib/jquery/jquery.min.js" defer></script>
+    <script src="~/lib/flowbite/flowbite.min.js" defer></script>
+    <script src="~/js/site.js" asp-append-version="true" defer></script>
+</body>
+</html>

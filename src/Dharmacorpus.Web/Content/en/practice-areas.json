@@ -1,0 +1,147 @@
+[
+  {
+    "slug": "litigation-dispute-resolution",
+    "group": "Dispute Resolution",
+    "title": "Litigation & Dispute Resolution",
+    "summary": "Civil and commercial disputes before the appropriate courts, from pre-litigation strategy through representation at trial.",
+    "scope": ["Civil disputes", "Commercial disputes", "Pre-litigation assessment and strategy", "Representation at trial"],
+    "whoFor": [
+      "Someone owes you money or has not honoured an agreement.",
+      "You have received a legal notice or summons in a civil case.",
+      "You want to know your options before a dispute reaches court."
+    ],
+    "related": ["arbitration-mediation", "property-revenue", "corporate-commercial", "writ-jurisdiction"]
+  },
+  {
+    "slug": "arbitration-mediation",
+    "group": "Dispute Resolution",
+    "title": "Arbitration & Mediation",
+    "summary": "Arbitration, mediation and negotiated settlements, including pre-litigation strategy, arbitral proceedings, interim measures, enforcement and challenges to arbitral awards.",
+    "scope": ["Pre-litigation strategy", "Arbitral proceedings", "Mediation and negotiated settlements", "Interim measures", "Enforcement of arbitral awards", "Challenges to arbitral awards"],
+    "whoFor": [
+      "Your contract has an arbitration clause and a dispute has arisen.",
+      "You would prefer a negotiated settlement over a long court case.",
+      "You hold an arbitral award and need it enforced, or want to challenge one."
+    ],
+    "related": ["litigation-dispute-resolution", "corporate-commercial", "compliance-regulatory"]
+  },
+  {
+    "slug": "corporate-commercial",
+    "group": "Commercial & Property",
+    "title": "Corporate & Commercial Law",
+    "summary": "Advice on business structuring, contracts, commercial arrangements, governance and related transactional matters.",
+    "scope": ["Business structuring", "Contracts", "Commercial arrangements", "Governance", "Transactional matters"],
+    "whoFor": [
+      "You are starting or restructuring a business.",
+      "You need a contract drafted or reviewed before you sign.",
+      "Partners or shareholders need clarity on roles and governance."
+    ],
+    "related": ["compliance-regulatory", "gst", "intellectual-property", "arbitration-mediation"]
+  },
+  {
+    "slug": "property-revenue",
+    "group": "Commercial & Property",
+    "title": "Property & Revenue",
+    "summary": "Advice and representation across title verification, partition and property disputes, declaration and injunction suits, registration and revenue matters, due diligence and property-related legal proceedings.",
+    "scope": ["Title verification", "Partition and property disputes", "Declaration and injunction suits", "Registration and revenue matters", "Due diligence", "Property-related legal proceedings"],
+    "whoFor": [
+      "You are buying land and want to be sure the seller has clear title.",
+      "Family members disagree on dividing ancestral or joint property.",
+      "Someone has encroached on your land or is preventing your use of it.",
+      "Revenue records such as patta do not match your documents."
+    ],
+    "prepare": "Bring sale or settlement deeds, the encumbrance certificate, patta and chitta extracts, and any notice or court order connected with the property.",
+    "related": ["litigation-dispute-resolution", "writ-jurisdiction", "arbitration-mediation", "corporate-commercial"]
+  },
+  {
+    "slug": "criminal-law",
+    "group": "Litigation & Constitutional",
+    "title": "Criminal Law",
+    "summary": "Representation in criminal proceedings, including bail, trial and related applications before the appropriate courts.",
+    "scope": ["Bail", "Trial", "Related applications before the appropriate courts"],
+    "whoFor": [
+      "You or a family member has been named in an FIR or received a summons.",
+      "Someone has been arrested and you need to understand bail.",
+      "You are a party to a criminal trial."
+    ],
+    "related": ["writ-jurisdiction", "litigation-dispute-resolution", "pmla"]
+  },
+  {
+    "slug": "writ-jurisdiction",
+    "group": "Litigation & Constitutional",
+    "title": "Writ Jurisdiction",
+    "summary": "Proceedings before High Courts involving challenges to administrative action and the exercise of constitutional remedies.",
+    "scope": ["Challenges to administrative action", "Constitutional remedies before High Courts"],
+    "whoFor": [
+      "A government authority has passed an order affecting you without proper process.",
+      "An authority has failed to act on your application.",
+      "A licence, approval or benefit has been cancelled or refused."
+    ],
+    "related": ["compliance-regulatory", "property-revenue", "criminal-law"]
+  },
+  {
+    "slug": "pmla",
+    "group": "Regulatory & Emerging",
+    "title": "PMLA",
+    "summary": "Advice and representation in proceedings under the Prevention of Money Laundering Act, including related attachment and adjudication matters.",
+    "scope": ["Proceedings under the Prevention of Money Laundering Act", "Attachment matters", "Adjudication matters"],
+    "whoFor": [
+      "You have received a notice or summons under the PMLA.",
+      "Property has been provisionally attached.",
+      "You are a party to adjudication proceedings."
+    ],
+    "related": ["criminal-law", "compliance-regulatory", "writ-jurisdiction"]
+  },
+  {
+    "slug": "gst",
+    "group": "Regulatory & Emerging",
+    "title": "GST",
+    "summary": "Advisory and representation in GST matters, including notices, assessments, appeals and compliance.",
+    "scope": ["GST notices", "Assessments", "Appeals", "Compliance"],
+    "whoFor": [
+      "Your business has received a GST notice or demand.",
+      "You disagree with an assessment and are considering an appeal.",
+      "You want to check that your business is GST-compliant."
+    ],
+    "related": ["compliance-regulatory", "corporate-commercial", "writ-jurisdiction"]
+  },
+  {
+    "slug": "it-technology-law",
+    "group": "Regulatory & Emerging",
+    "title": "IT & Technology Law",
+    "summary": "Advice on technology contracts, data protection, online platforms and technology-related regulatory matters.",
+    "scope": ["Technology contracts", "Data protection", "Online platforms", "Technology-related regulatory matters"],
+    "whoFor": [
+      "You are signing a software, IT services or platform agreement.",
+      "Your business collects personal data and needs to handle it lawfully.",
+      "You run or use an online platform and face a legal issue."
+    ],
+    "related": ["intellectual-property", "corporate-commercial", "compliance-regulatory"]
+  },
+  {
+    "slug": "intellectual-property",
+    "group": "Regulatory & Emerging",
+    "title": "Intellectual Property",
+    "summary": "Trademark, copyright and related intellectual property advisory, registration and enforcement support.",
+    "scope": ["Trademark", "Copyright", "Advisory", "Registration", "Enforcement support"],
+    "whoFor": [
+      "You want to register a brand name or logo as a trademark.",
+      "Someone is using your brand, content or design without permission.",
+      "You need advice on who owns work created for your business."
+    ],
+    "related": ["it-technology-law", "corporate-commercial", "litigation-dispute-resolution"]
+  },
+  {
+    "slug": "compliance-regulatory",
+    "group": "Regulatory & Emerging",
+    "title": "Compliance & Regulatory",
+    "summary": "Advice on statutory compliance, regulatory requirements and interactions with authorities across sectors.",
+    "scope": ["Statutory compliance", "Regulatory requirements", "Interactions with authorities"],
+    "whoFor": [
+      "You need to understand which laws and licences apply to your business.",
+      "An authority has raised a query or started proceedings.",
+      "You want a compliance check before expanding or restructuring."
+    ],
+    "related": ["gst", "corporate-commercial", "writ-jurisdiction", "pmla"]
+  }
+]

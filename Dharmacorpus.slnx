@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Dharmacorpus.Web/Dharmacorpus.Web.csproj" />
+  </Folder>
+</Solution>

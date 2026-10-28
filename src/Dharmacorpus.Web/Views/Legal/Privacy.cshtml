@@ -1,0 +1,33 @@
+@model SiteInfo
+
+<partial name="_PageHero" model='new PageHeroModel("Privacy Policy", "How this website handles information you share with the office.", "Legal")' />
+
+<section class="py-12 sm:py-16">
+    <div class="container-site">
+        <article class="prose-legal max-w-3xl text-[17px]">
+            <h2>What we collect</h2>
+            <p>If you send an enquiry through the contact form, we receive the details you enter: your name, phone number, email address (if given), the area of your matter, your preferred language and your short description. If you call or email the office, we receive the information you choose to share.</p>
+
+            <h2>How we use it</h2>
+            <p>We use these details only to respond to your enquiry and to decide whether the practice can assist. Enquiry details are sent by email to the office; the website itself does not store them in a database.</p>
+
+            <h2>What we do not do</h2>
+            <ul>
+                <li>We do not sell or share your details with third parties for marketing.</li>
+                <li>This website does not use advertising or tracking cookies.</li>
+                <li>Your choice on the disclaimer notice is remembered only in your own browser.</li>
+            </ul>
+
+            <h2>Confidential information</h2>
+            <p>Please do not send confidential documents or sensitive details until the office has confirmed that it can take up your matter.</p>
+
+            <h2>Security</h2>
+            <p>The website is served over an encrypted connection and the enquiry form is protected against automated misuse.</p>
+
+            <h2>Your choices</h2>
+            <p>To ask about, correct or remove information you have shared with the office, contact us at <a href="mailto:@Model.Email">@Model.Email</a> or <a href="tel:@Model.Phone">@Model.PhoneDisplay</a>.</p>
+
+            <p class="text-sm">This policy may be updated from time to time; the current version is always available on this page.</p>
+        </article>
+    </div>
+</section>

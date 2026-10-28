@@ -1,0 +1,81 @@
+@model PracticeDetailViewModel
+@{
+    var a = Model.Area;
+    var site = Model.Site;
+}
+
+<partial name="_PageHero" model='new PageHeroModel(a.Title, a.Summary, $"§ {a.NumberLabel} · {a.Group}")' />
+
+<section class="py-14 sm:py-20">
+    <div class="container-site flex flex-wrap items-start gap-14">
+        <div class="flex min-w-0 flex-[999_1_560px] flex-col gap-16">
+
+            @if (a.WhoFor.Count > 0)
+            {
+                <div class="space-y-5" id="who">
+                    <h2 class="text-[28px] font-semibold sm:text-[32px]">Who this is for</h2>
+                    <p class="lead">You may need advice in this area if any of these sound familiar.</p>
+                    <ul class="grid gap-4 sm:grid-cols-2">
+                        @foreach (var w in a.WhoFor)
+                        {
+                            <li class="card flex gap-3.5 p-5 text-base leading-relaxed text-ink"><span class="mt-0.5 shrink-0 text-navy">@Html.Icon("check", "size-[22px]", 2)</span>@w</li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            <div class="space-y-5" id="scope">
+                <h2 class="text-[28px] font-semibold sm:text-[32px]">What we handle</h2>
+                <ol class="border-t border-line">
+                    @for (var i = 0; i < a.Scope.Count; i++)
+                    {
+                        <li class="flex gap-4 border-b border-line py-4 text-[17px] text-ink">
+                            <span class="w-7 font-serif font-semibold text-gold-dark">@((i + 1).ToString("00"))</span>@a.Scope[i]
+                        </li>
+                    }
+                </ol>
+            </div>
+
+            <div class="space-y-6" id="process">
+                <h2 class="text-[28px] font-semibold sm:text-[32px]">How a matter usually proceeds</h2>
+                <partial name="_ProcessSteps" />
+            </div>
+
+            @if (Model.Related.Count > 0)
+            {
+                <div class="space-y-4">
+                    <h2 class="text-2xl font-semibold">Related practice areas</h2>
+                    <div class="flex flex-wrap gap-2.5">
+                        @foreach (var r in Model.Related)
+                        {
+                            <a href="/practice-areas/@r.Slug" class="chip no-underline">@r.Title</a>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
+        <aside class="flex flex-[1_1_320px] flex-col gap-4 lg:sticky lg:top-28" aria-label="Contact the office">
+            <div class="flex flex-col gap-4 rounded-xl bg-ink p-7 text-line">
+                <h2 class="text-2xl font-semibold text-ivory">Discuss your matter</h2>
+                <p class="text-[15px] leading-relaxed">Call or write to the office. We will confirm the appropriate next step.</p>
+                <a href="tel:@site.Phone" class="btn-light !justify-start">@Html.Icon("phone", "size-[18px]") @site.PhoneDisplay</a>
+                <a href="mailto:@site.Email" class="btn-light !justify-start">@Html.Icon("mail", "size-[18px]") Email the office</a>
+                <a href="/contact" class="btn border-[1.5px] border-gold text-ivory hover:bg-white/10">Send an enquiry</a>
+                <p class="text-xs leading-normal text-panel-muted">Please do not send confidential documents until the office confirms it can assist.</p>
+            </div>
+            <div class="space-y-2.5 rounded-xl bg-navy-tint p-6">
+                <p class="text-[13px] font-bold uppercase tracking-[0.12em] text-navy">Prepare for your meeting</p>
+                <p class="text-[15px] leading-relaxed text-ink">@(a.Prepare ?? "Bring the documents, notices, orders and records connected with your matter, and a short note of the key dates and events.")</p>
+            </div>
+            <nav aria-label="On this page" class="hidden flex-col gap-2.5 px-1 py-2 text-sm lg:flex">
+                <span class="text-[13px] font-bold uppercase tracking-[0.12em] text-gold-dark">On this page</span>
+                @if (a.WhoFor.Count > 0) { <a href="#who" class="no-underline hover:underline">Who this is for</a> }
+                <a href="#scope" class="no-underline hover:underline">What we handle</a>
+                <a href="#process" class="no-underline hover:underline">How a matter proceeds</a>
+            </nav>
+        </aside>
+    </div>
+</section>
+
+<partial name="_ContactBand" />

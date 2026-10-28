@@ -1,0 +1,17 @@
+@model ContentService
+
+<partial name="_PageHero" model='new PageHeroModel("Meet the team", $"Dharmacorpus is a practice of {Model.Site.AdvocateCount} advocates, based in Dharmapuri and appearing before courts and forums across Tamil Nadu and beyond.", "Our people")' />
+
+<section class="py-16 sm:py-20">
+    <div class="container-site flex flex-col gap-10">
+        <div class="grid grid-cols-2 gap-5 lg:grid-cols-4 lg:gap-6">
+            @foreach (var a in Model.Advocates)
+            {
+                <partial name="_AdvocateCard" model="a" />
+            }
+        </div>
+        <p class="max-w-3xl text-[15px] leading-relaxed">Detailed biographies and credentials are being confirmed by the practice and will be published once reviewed. In the meantime, the office can be contacted directly about any matter.</p>
+    </div>
+</section>
+
+<partial name="_ContactBand" />

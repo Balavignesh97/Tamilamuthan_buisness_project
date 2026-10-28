@@ -1,0 +1,22 @@
+@model ContentService
+@{ var status = (int)(ViewData["StatusCode"] ?? 500); }
+<section class="py-24 sm:py-32">
+    <div class="container-site flex max-w-2xl flex-col items-start gap-6">
+        <p class="eyebrow">§ @status</p>
+        @if (status == 404)
+        {
+            <h1 class="text-4xl font-semibold sm:text-5xl">This page could not be found</h1>
+            <p class="lead">The page may have moved. These pages may help:</p>
+        }
+        else
+        {
+            <h1 class="text-4xl font-semibold sm:text-5xl">Something went wrong</h1>
+            <p class="lead">Please try again in a moment, or contact the office directly.</p>
+        }
+        <div class="flex flex-wrap gap-3">
+            <a href="/" class="btn-primary">Home</a>
+            <a href="/practice-areas" class="btn-outline">Practice areas</a>
+            <a href="/contact" class="btn-outline">Contact</a>
+        </div>
+    </div>
+</section>

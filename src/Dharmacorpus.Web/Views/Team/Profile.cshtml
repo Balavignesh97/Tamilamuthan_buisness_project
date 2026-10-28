@@ -1,0 +1,66 @@
+@model AdvocateProfileViewModel
+@{
+    var a = Model.Advocate;
+    var seo = ViewData.GetSeo();
+}
+
+<section class="border-b border-line bg-white pb-14 pt-10 sm:pb-16" aria-labelledby="pageTitle">
+    <div class="container-site flex flex-col gap-8">
+        @if (seo is not null)
+        {
+            <partial name="_Breadcrumbs" model="seo.Breadcrumbs" />
+        }
+        <div class="grid items-center gap-10 md:grid-cols-[280px_1fr]">
+            <div class="flex aspect-[4/5] w-full max-w-[280px] items-center justify-center overflow-hidden rounded-xl border border-line bg-navy-tint">
+                @if (!string.IsNullOrWhiteSpace(a.Photo))
+                {
+                    <img src="@a.Photo" alt="Portrait of @a.Name" class="size-full object-cover" width="560" height="700" />
+                }
+                else
+                {
+                    <span class="font-serif text-7xl font-semibold text-navy" aria-hidden="true">@a.Initials</span>
+                }
+            </div>
+            <div class="flex flex-col gap-4">
+                <p class="eyebrow">Advocate</p>
+                <h1 id="pageTitle" class="text-[36px] font-semibold leading-tight sm:text-5xl">@a.Name</h1>
+                <p class="text-lg">@a.Titles</p>
+                @if (!string.IsNullOrWhiteSpace(a.LinkedIn))
+                {
+                    <p><a href="@a.LinkedIn" class="link-arrow" rel="noopener noreferrer" target="_blank">@Html.Icon("linkedin") LinkedIn profile <span class="sr-only">(opens in a new tab)</span></a></p>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 sm:py-20">
+    <div class="container-site grid gap-12 lg:grid-cols-[1.4fr_1fr]">
+        <div class="space-y-5">
+            <h2 class="text-[28px] font-semibold">Professional particulars</h2>
+            <dl class="divide-y divide-line border-y border-line">
+                <div class="grid gap-1 py-4 sm:grid-cols-[220px_1fr]"><dt class="font-bold text-ink">Role</dt><dd>@a.Titles</dd></div>
+                <div class="grid gap-1 py-4 sm:grid-cols-[220px_1fr]"><dt class="font-bold text-ink">Practice</dt><dd>Dharmacorpus, @Model.Site.Locality, @Model.Site.Region</dd></div>
+            </dl>
+            <p class="text-[15px] leading-relaxed">Enrolment details, Bar Council, qualifications and areas of focus are being confirmed by the practice and will be published here once reviewed.</p>
+        </div>
+        <aside class="space-y-4 rounded-xl bg-ink p-7 text-line" aria-label="Contact the office">
+            <h2 class="text-2xl font-semibold text-ivory">Contact the office</h2>
+            <p class="text-[15px] leading-relaxed">To discuss a matter, please contact the office. We will confirm the appropriate next step.</p>
+            <a href="tel:@Model.Site.Phone" class="btn-light w-full !justify-start">@Html.Icon("phone", "size-[18px]") @Model.Site.PhoneDisplay</a>
+            <a href="/contact" class="btn border-[1.5px] border-gold w-full text-ivory hover:bg-white/10">Send an enquiry</a>
+        </aside>
+    </div>
+</section>
+
+<section class="border-t border-line bg-mist py-16 sm:py-20" aria-labelledby="othersTitle">
+    <div class="container-site space-y-8">
+        <h2 id="othersTitle" class="text-[28px] font-semibold">Other advocates</h2>
+        <div class="grid grid-cols-2 gap-5 lg:grid-cols-3 lg:gap-6">
+            @foreach (var o in Model.Others)
+            {
+                <partial name="_AdvocateCard" model="o" />
+            }
+        </div>
+    </div>
+</section>

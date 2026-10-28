@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: src/Dharmacorpus.Web/package-lock.json
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Install front-end packages
+        working-directory: src/Dharmacorpus.Web
+        run: npm ci --no-audit --no-fund
+
+      - name: Build (Tailwind + .NET)
+        run: dotnet build Dharmacorpus.slnx -c Release
+
+      - name: Publish
+        run: dotnet publish src/Dharmacorpus.Web -c Release -o out -p:SkipClientBuild=true

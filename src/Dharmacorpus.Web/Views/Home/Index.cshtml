@@ -1,0 +1,133 @@
+﻿@model ContentService
+@{
+    var site = Model.Site;
+    var finder = new (string Icon, string Title, string Text, string Slug)[]
+    {
+        ("home", "Land, house or property", "Title doubts, partition between family members, encroachment, registration or patta issues.", "property-revenue"),
+        ("shield", "A police or criminal case", "An FIR, summons, arrest, bail or a criminal trial involving you or a family member.", "criminal-law"),
+        ("briefcase", "Business, tax or GST", "GST notices and appeals, contracts, business structuring or regulatory compliance.", "gst"),
+        ("scale", "A civil dispute", "Money recovery, breach of contract, injunctions, or settling a dispute by arbitration or mediation.", "litigation-dispute-resolution"),
+        ("landmark", "Action by a government office", "Challenging an order, cancellation or inaction of an authority before the High Court.", "writ-jurisdiction"),
+        ("file-text", "Brand, data or technology", "Trademarks and copyright, technology contracts, data protection or online platforms.", "intellectual-property"),
+    };
+}
+
+<!-- Hero -->
+<section class="border-b border-line py-16 sm:py-24" aria-labelledby="heroTitle">
+    <div class="container-site grid items-center gap-14 lg:grid-cols-[1.25fr_1fr]">
+        <div class="flex flex-col gap-7">
+            <p class="eyebrow">Advocates in @site.Locality · @site.Region</p>
+            <h1 id="heroTitle" class="text-[36px] font-semibold leading-[1.1] sm:text-[52px] lg:text-[58px]">@site.Tagline</h1>
+            <p class="max-w-xl text-lg leading-relaxed sm:text-[19px]">Dharmacorpus is a practice of @site.AdvocateCount advocates appearing before District Courts, High Courts and tribunals across Tamil Nadu, in litigation, property, criminal, commercial and regulatory matters.</p>
+            <div class="flex flex-wrap gap-4">
+                <a href="#finder" class="btn-primary">Find your legal area @Html.Icon("arrow-right", "size-[18px]", 2)</a>
+                <a href="tel:@site.Phone" class="btn-outline">@Html.Icon("phone", "size-[18px]") Call the office</a>
+            </div>
+            <p class="text-[13px]">Information on this site is general and is not legal advice.</p>
+        </div>
+
+        <aside aria-label="The practice at a glance" class="flex flex-col gap-7 rounded-xl bg-ink p-8 text-line sm:p-10">
+            <div class="leaf-rule" aria-hidden="true"><span></span></div>
+            <p class="eyebrow-dark">The practice at a glance</p>
+            <dl class="grid grid-cols-2 gap-7">
+                <div class="flex flex-col-reverse gap-1"><dt class="text-sm">Years of combined practice</dt><dd class="font-serif text-[44px] font-semibold leading-none text-ivory">@site.YearsCombined</dd></div>
+                <div class="flex flex-col-reverse gap-1"><dt class="text-sm">Advocates</dt><dd class="font-serif text-[44px] font-semibold leading-none text-ivory">@site.AdvocateCount</dd></div>
+                <div class="flex flex-col-reverse gap-1"><dt class="text-sm">Areas of practice</dt><dd class="font-serif text-[44px] font-semibold leading-none text-ivory">@site.PracticeAreaCount</dd></div>
+                <div class="flex flex-col-reverse gap-1"><dt class="text-sm">Levels of forum: District, High Court, tribunals</dt><dd class="font-serif text-[44px] font-semibold leading-none text-ivory">3</dd></div>
+            </dl>
+            <p class="text-xs leading-normal text-panel-muted">Combined years are based on the professional experience of the firm's advocates since enrolment.</p>
+            <div class="leaf-rule" aria-hidden="true"><span></span></div>
+        </aside>
+    </div>
+</section>
+
+<!-- § 01 Finder -->
+<section id="finder" class="scroll-mt-24 py-20 sm:py-24" aria-labelledby="finderTitle">
+    <div class="container-site flex flex-col gap-10">
+        <div class="max-w-2xl space-y-3">
+            <p class="eyebrow">§ 01 · Start here</p>
+            <h2 id="finderTitle" class="h2">What do you need help with?</h2>
+            <p class="lead">Choose the situation closest to yours to see the relevant area of practice.</p>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            @foreach (var f in finder)
+            {
+                <a href="/practice-areas/@f.Slug" class="card reveal group flex items-start gap-4 p-6 no-underline transition hover:border-navy hover:shadow-lg sm:flex-col sm:gap-3.5 sm:p-7">
+                    <span class="text-navy">@Html.Icon(f.Icon, "size-8", 1.5)</span>
+                    <span class="flex flex-col gap-2">
+                        <span class="font-serif text-xl font-semibold text-ink sm:text-[22px]">@f.Title</span>
+                        <span class="text-[15px] leading-relaxed text-slate">@f.Text</span>
+                    </span>
+                </a>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- § 02 Practice areas -->
+<section class="border-y border-line bg-mist py-20 sm:py-24" aria-labelledby="practiceTitle">
+    <div class="container-site flex flex-col gap-9">
+        <div class="flex flex-wrap items-end justify-between gap-6">
+            <div class="max-w-2xl space-y-3">
+                <p class="eyebrow">§ 02 · Our expertise</p>
+                <h2 id="practiceTitle" class="h2">Eleven areas of legal practice</h2>
+            </div>
+            <a href="/practice-areas" class="link-arrow">View all practice areas @Html.Icon("arrow-right", "size-[18px]", 2)</a>
+        </div>
+        <partial name="_PracticeFilter" model="Model.Groups" />
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-practice-grid>
+            @foreach (var p in Model.PracticeAreas)
+            {
+                <partial name="_PracticeCard" model="p" />
+            }
+        </div>
+    </div>
+</section>
+
+<!-- § 03 Process -->
+<section class="py-20 sm:py-24" aria-labelledby="processTitle">
+    <div class="container-site flex flex-col gap-10">
+        <div class="max-w-2xl space-y-3">
+            <p class="eyebrow">§ 03 · Our approach</p>
+            <h2 id="processTitle" class="h2">How a matter moves with us</h2>
+            <p class="lead">A structured process from the first conversation through to representation and follow-up.</p>
+        </div>
+        <partial name="_ProcessSteps" />
+    </div>
+</section>
+
+<!-- § 04 Courts -->
+<partial name="_Courts" model='"§ 04 · Jurisdictions"' />
+
+<!-- § 05 Team -->
+<section class="py-20 sm:py-24" aria-labelledby="teamTitle">
+    <div class="container-site flex flex-col gap-10">
+        <div class="flex flex-wrap items-end justify-between gap-6">
+            <div class="max-w-2xl space-y-3">
+                <p class="eyebrow">§ 05 · Our people</p>
+                <h2 id="teamTitle" class="h2">Meet the advocates</h2>
+            </div>
+            <a href="/team" class="link-arrow">More about the team @Html.Icon("arrow-right", "size-[18px]", 2)</a>
+        </div>
+        <div class="grid grid-cols-2 gap-5 lg:grid-cols-4 lg:gap-6">
+            @foreach (var a in Model.Advocates)
+            {
+                <partial name="_AdvocateCard" model="a" />
+            }
+        </div>
+    </div>
+</section>
+
+<!-- § 06 FAQs -->
+<section class="border-y border-line bg-mist py-20 sm:py-24" aria-labelledby="faqTitle">
+    <div class="container-site grid items-start gap-12 lg:grid-cols-[1fr_1.4fr]">
+        <div class="space-y-3">
+            <p class="eyebrow">§ 06 · Common questions</p>
+            <h2 id="faqTitle" class="h2">Before you contact us</h2>
+            <p class="lead">Short answers to what most people ask first.</p>
+        </div>
+        <partial name="_FaqAccordion" model="Model.Faqs" />
+    </div>
+</section>
+
+<partial name="_ContactBand" />

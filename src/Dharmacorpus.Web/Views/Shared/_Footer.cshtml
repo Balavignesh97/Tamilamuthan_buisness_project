@@ -1,0 +1,47 @@
+@inject ContentService Content
+@{ var site = Content.Site; }
+<footer class="bg-ink pb-8 pt-16 text-[15px] text-panel-muted">
+    <div class="container-site">
+        <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="space-y-4">
+                <span class="block font-serif text-xl font-bold tracking-[0.06em] text-ivory">DHARMACORPUS</span>
+                <p class="leading-relaxed">@site.Description</p>
+            </div>
+            <div>
+                <p class="eyebrow-dark mb-3">Explore</p>
+                <ul class="space-y-2">
+                    <li><a href="/about" class="text-line no-underline hover:text-white">About</a></li>
+                    <li><a href="/practice-areas" class="text-line no-underline hover:text-white">Practice Areas</a></li>
+                    <li><a href="/team" class="text-line no-underline hover:text-white">Team</a></li>
+                    <li><a href="/contact" class="text-line no-underline hover:text-white">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="eyebrow-dark mb-3">Practice</p>
+                <ul class="space-y-2">
+                    @foreach (var p in Content.PracticeAreas.Take(5))
+                    {
+                        <li><a href="/practice-areas/@p.Slug" class="text-line no-underline hover:text-white">@p.Title</a></li>
+                    }
+                    <li><a href="/practice-areas" class="text-line no-underline hover:text-white">All @site.PracticeAreaCount areas →</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="eyebrow-dark mb-3">Office</p>
+                <ul class="space-y-2">
+                    <li>@site.Locality, @site.Region, @site.CountryName</li>
+                    <li><a href="tel:@site.Phone" class="text-line no-underline hover:text-white">@site.PhoneDisplay</a></li>
+                    <li><a href="mailto:@site.Email" class="text-line no-underline hover:text-white">@site.Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-12 flex flex-col gap-4 border-t border-panel-line pt-6 text-[13px] md:flex-row md:items-center md:justify-between">
+            <p>Information on this website is provided for general awareness and does not constitute legal advice. © @DateTime.UtcNow.Year @site.Name.</p>
+            <nav aria-label="Legal" class="flex gap-5">
+                <a href="/disclaimer" class="text-line hover:text-white">Disclaimer</a>
+                <a href="/privacy-policy" class="text-line hover:text-white">Privacy Policy</a>
+                <a href="/terms-of-use" class="text-line hover:text-white">Terms of Use</a>
+            </nav>
+        </div>
+    </div>
+</footer>

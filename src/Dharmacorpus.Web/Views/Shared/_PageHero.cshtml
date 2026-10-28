@@ -1,0 +1,19 @@
+@model PageHeroModel
+@{ var seo = ViewData.GetSeo(); }
+<section class="border-b border-line bg-white pb-14 pt-10 sm:pb-16" aria-labelledby="pageTitle">
+    <div class="container-site flex flex-col gap-5">
+        @if (seo is not null && seo.Breadcrumbs.Count > 0)
+        {
+            <partial name="_Breadcrumbs" model="seo.Breadcrumbs" />
+        }
+        @if (!string.IsNullOrEmpty(Model.Eyebrow))
+        {
+            <p class="eyebrow">@Model.Eyebrow</p>
+        }
+        <h1 id="pageTitle" class="max-w-4xl text-[36px] font-semibold leading-[1.1] sm:text-[52px]">@Model.Title</h1>
+        @if (!string.IsNullOrEmpty(Model.Lead))
+        {
+            <p class="max-w-3xl text-lg leading-relaxed sm:text-xl">@Model.Lead</p>
+        }
+    </div>
+</section>

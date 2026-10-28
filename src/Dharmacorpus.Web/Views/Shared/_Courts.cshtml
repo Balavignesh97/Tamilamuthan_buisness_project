@@ -1,0 +1,25 @@
+@model string
+@* Model = section label, e.g. "§ 04 · Jurisdictions" *@
+<section class="bg-ink py-20 text-line sm:py-24" aria-labelledby="courtsTitle">
+    <div class="container-site grid items-center gap-12 lg:grid-cols-2">
+        <div class="space-y-4">
+            <p class="eyebrow-dark">@Model</p>
+            <h2 id="courtsTitle" class="text-[28px] font-semibold leading-tight text-ivory sm:text-[40px]">Courts and forums we appear before</h2>
+            <p class="lead">Our advocates appear before District Courts, High Courts and appropriate tribunals and statutory forums. We accept suitable matters across Tamil Nadu and, where appropriate, matters before High Courts and forums in other States.</p>
+        </div>
+        <ul class="flex flex-col gap-4">
+            <li class="reveal flex items-center gap-5 rounded-xl border border-panel-line p-6">
+                <span class="w-10 font-serif text-[28px] font-semibold text-gold">I</span>
+                <span><span class="block text-lg font-bold text-ivory">District Courts</span><span class="text-sm">Civil, criminal and property matters across Tamil Nadu</span></span>
+            </li>
+            <li class="reveal flex items-center gap-5 rounded-xl border border-panel-line p-6">
+                <span class="w-10 font-serif text-[28px] font-semibold text-gold">II</span>
+                <span><span class="block text-lg font-bold text-ivory">High Courts</span><span class="text-sm">Writs, appeals and related proceedings; other States where appropriate</span></span>
+            </li>
+            <li class="reveal flex items-center gap-5 rounded-xl border border-panel-line p-6">
+                <span class="w-10 font-serif text-[28px] font-semibold text-gold">III</span>
+                <span><span class="block text-lg font-bold text-ivory">Tribunals and statutory forums</span><span class="text-sm">Regulatory, tax and adjudicating authorities</span></span>
+            </li>
+        </ul>
+    </div>
+</section>

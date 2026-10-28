@@ -1,0 +1,12 @@
+@inject ContentService Content
+<nav aria-label="Quick contact" class="fixed inset-x-0 bottom-0 z-30 grid h-[72px] grid-cols-3 border-t border-panel-line bg-ink md:hidden">
+    <a href="tel:@Content.Site.Phone" class="flex flex-col items-center justify-center gap-1 text-xs font-bold text-ivory no-underline">
+        <span class="text-gold">@Html.Icon("phone", "size-[22px]")</span>Call
+    </a>
+    <a href="mailto:@Content.Site.Email" class="flex flex-col items-center justify-center gap-1 text-xs font-bold text-ivory no-underline">
+        <span class="text-gold">@Html.Icon("mail", "size-[22px]")</span>Email
+    </a>
+    <a href="/contact" class="flex flex-col items-center justify-center gap-1 bg-navy text-xs font-bold text-white no-underline">
+        @Html.Icon("message", "size-[22px]")Enquire
+    </a>
+</nav>
